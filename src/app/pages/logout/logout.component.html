@@ -1,0 +1,20 @@
+<main>
+    <h1>Logout</h1>
+    <mat-card>
+        <mat-card-title>{{this.Usuario.Nome}}, tem certeza que deseja sair?</mat-card-title>
+        <mat-card-content>
+            <form>
+                <div class="button">                    
+                    <button type="button" mat-button-icon (click)="goToHome()">
+                        Não
+                        <mat-icon>home</mat-icon>                        
+                    </button>
+                    <button type="button" mat-button-icon (click)="logout()">
+                        Sim
+                        <mat-icon>logout</mat-icon>                        
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</main>

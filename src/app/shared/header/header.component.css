@@ -1,0 +1,14 @@
+header{
+    display:grid;
+    grid-template-columns: 85% 15%;
+}
+
+.menu{    
+    text-align: center;
+}
+
+.user{
+    text-align: right;
+    padding: 1em; 
+    font-weight: bold;
+}

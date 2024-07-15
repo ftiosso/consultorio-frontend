@@ -1,0 +1,29 @@
+<header>
+    <h1>Consultório</h1>
+</header>
+<main>
+    <mat-card>
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <form (ngSubmit)="submit()">
+                <div>
+                    <mat-form-field>
+                        <input type="email" name="email" matInput placeholder="e-mail" [(ngModel)]="this.Login.Email" maxlength="100">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input type="password" name="senha" matInput placeholder="senha" [(ngModel)]="this.Login.Senha" maxlength="20">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="Erro" class="error">
+                    <p class="break-line">{{ Erro }}</p>                
+                </div>
+                <div class="button">
+                    <button type="submit" mat-button>Logar</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</main>
+<app-footer></app-footer>

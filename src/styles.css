@@ -1,0 +1,49 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*meu css genérico*/
+
+a:link, a:visited {
+	text-decoration: none
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	text-decoration: none
+}
+
+form.pesquisa input, form.pesquisa label, form.pesquisa button{
+    margin: 10px 0 10px 10px;
+}
+
+/*meu css genérico "estendendo" a biblioteca pure*/
+
+form.pure-form legend{
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+
+form.pure-form div.pure-controls button{
+    margin-left: 5px;
+}
+
+form.pure-form label.alignLeft{
+    text-align: left;
+}
+
+table.pure-table{
+    margin: 20px auto;    
+    width: 90%;
+}
+
+table.pure-table th, td{
+    text-align: center;    
+}
+
+table.pure-table td.alignLeft{
+    text-align: left;
+}

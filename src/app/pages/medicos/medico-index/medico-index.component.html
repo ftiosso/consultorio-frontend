@@ -1,0 +1,31 @@
+<main>
+    <form class="pure-form pesquisa">
+        <fieldset>
+            <legend>Lista de médicos</legend>
+            <label for="id">Id:</label>
+            <input type="number" id="id" name="id" [(ngModel)]="this.Id">
+            <label for="crm">CRM:</label>
+            <input type="text" id="crm" name="crm" [(ngModel)]="this.CRM">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" [(ngModel)]="this.Nome" class="pure-input-1-3">
+            <button type="button" class="pure-button pure-button-primary" (click)="definirPesquisa()" id="btnPesquisar">Pesquisar</button>
+            <button type="button" routerLink="/medicos/create" class="pure-button ">Novo</button>
+        </fieldset>
+    </form>
+    <table class="pure-table pure-table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>CRM</th>
+            </tr>
+        </thead>
+        <tbody data-list>
+            <tr *ngFor="let medico of this.Medicos">
+                <td><a routerLink="/medicos/edit/{{medico.Id}}">{{medico.Id}}</a></td>
+                <td class="alignLeft">{{medico.Nome}}</td>
+                <td>{{medico.CRM}}</td>
+            </tr>
+        </tbody>
+    </table>
+</main>

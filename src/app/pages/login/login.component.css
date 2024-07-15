@@ -1,0 +1,35 @@
+h1{
+    text-align: center;
+    margin: 100px 0;
+    text-transform: uppercase;
+}
+
+main{
+    margin: 0 auto;
+    width: 35%;
+}
+
+mat-card-title{
+    text-align: center;
+    margin: 20px 0;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.error {
+    padding: 16px;
+    margin: 10px 0;    
+    color: white;
+    background-color: red;
+}
+
+.break-line {
+    white-space: pre-wrap;
+}
+
+
+.button{
+    text-align: right;
+}

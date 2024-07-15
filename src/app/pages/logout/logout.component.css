@@ -1,0 +1,27 @@
+h1{
+    text-align: center;
+    margin: 100px 0;
+    text-transform: uppercase;
+}
+
+main{
+    margin: 0 auto;
+    width: 35%;
+}
+
+mat-card-title{
+    text-align: center;
+    margin: 20px 0;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.button{
+    text-align: center;    
+}
+
+button{
+    margin-left: 20px;
+}
