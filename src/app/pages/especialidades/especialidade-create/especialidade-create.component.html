@@ -1,0 +1,16 @@
+<main>
+    <form class="pure-form pure-form-aligned">
+        <fieldset>
+            <legend>Nova Especialidade</legend>
+            <div class="pure-control-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" [(ngModel)]="this.Especialidade.Nome" class="pure-input-1-3" maxlength="100">
+            </div>
+            <div class="pure-controls">
+                <button type="button" (click)="enviar()" class="pure-button pure-button-primary">Enviar</button>
+                <button type="reset" class="pure-button ">Limpar</button>
+                <button type="button" routerLink="/especialidades" class="pure-button ">Voltar</button>
+            </div>
+        </fieldset>
+    </form>
+</main>

@@ -25,6 +25,10 @@ import { MasterDefaultComponent } from './pages/masters/master-default/master-de
 
 import { HomeComponent } from './pages/home/home.component';
 
+import { EspecialidadeIndexComponent } from './pages/especialidades/especialidade-index/especialidade-index.component';
+import { EspecialidadeCreateComponent } from './pages/especialidades/especialidade-create/especialidade-create.component';
+import { EspecialidadeEditComponent } from './pages/especialidades/especialidade-edit/especialidade-edit.component';
+
 import { MedicoIndexComponent } from './pages/medicos/medico-index/medico-index.component';
 import { MedicoCreateComponent } from './pages/medicos/medico-create/medico-create.component';
 import { MedicoEditComponent } from './pages/medicos/medico-edit/medico-edit.component';
@@ -60,6 +64,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     LoginComponent,
     MasterDefaultComponent,
     HomeComponent,
+    EspecialidadeIndexComponent,
+    EspecialidadeCreateComponent,
+    EspecialidadeEditComponent,
     MedicoIndexComponent,
     MedicoCreateComponent,
     MedicoEditComponent,
@@ -73,7 +80,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     UsuarioCreateComponent,
     UsuarioEditComponent,
     LogoutComponent,
-    Mensagem404Component
+    Mensagem404Component    
   ],
   imports: [
     BrowserModule,

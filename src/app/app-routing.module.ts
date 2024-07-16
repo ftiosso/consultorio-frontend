@@ -6,6 +6,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { MasterDefaultComponent } from './pages/masters/master-default/master-default.component';
 import { HomeComponent } from './pages/home/home.component';
 
+import { EspecialidadeIndexComponent } from './pages/especialidades/especialidade-index/especialidade-index.component';
+import { EspecialidadeCreateComponent } from './pages/especialidades/especialidade-create/especialidade-create.component';
+import { EspecialidadeEditComponent } from './pages/especialidades/especialidade-edit/especialidade-edit.component';
+
 import { MedicoIndexComponent } from './pages/medicos/medico-index/medico-index.component';
 import { MedicoCreateComponent } from './pages/medicos/medico-create/medico-create.component';
 import { MedicoEditComponent } from './pages/medicos/medico-edit/medico-edit.component';
@@ -36,6 +40,10 @@ const routes: Routes = [
     children: [
       {path:'', redirectTo:'home', pathMatch:'full'},
       {path:'home', component:HomeComponent, },
+
+      {path:'especialidades', component:EspecialidadeIndexComponent},
+      {path:'especialidades/create', component:EspecialidadeCreateComponent},
+      {path:'especialidades/edit/:id', component:EspecialidadeEditComponent},
 
       {path:'medicos', component:MedicoIndexComponent},
       {path:'medicos/create', component:MedicoCreateComponent},
