@@ -26,8 +26,8 @@ export class PacienteEditComponent {
     this.pacientesService.getByCodigo(Number(codigo))
     .pipe(take(1))
     .subscribe({
-      next: (paciente:Paciente)=>{
-        this.Paciente = paciente;
+      next: (jsonPaciente:Paciente)=>{
+        this.Paciente = jsonPaciente;
       },
       error: (jsonErro: HttpErrorResponse) => {
         this.exibirMensagemErro(jsonErro);
@@ -40,7 +40,7 @@ export class PacienteEditComponent {
       this.pacientesService.put(this.Paciente)
       .pipe(take(1))
       .subscribe({
-        next: (paciente:Paciente)=>{
+        next: (jsonPaciente:Paciente)=>{
           this.exibirMensagemRedirecionar(`Paciente ${this.Paciente.Nome} alterado com sucesso.`);
         },
         error: (jsonErro: HttpErrorResponse) => {

@@ -29,8 +29,8 @@ export class EspecialidadeEditComponent {
     this.especialidadesService.getById(Number(id))
     .pipe(take(1))
     .subscribe({
-      next: (especialidade:Especialidade)=>{
-        this.Especialidade = especialidade;
+      next: (jsonEspecialidade:Especialidade)=>{
+        this.Especialidade = jsonEspecialidade;
       },
       error: (jsonErro: HttpErrorResponse) => {
         this.exibirMensagemErro(jsonErro);
@@ -43,7 +43,7 @@ export class EspecialidadeEditComponent {
       this.especialidadesService.put(this.Especialidade)
       .pipe(take(1))
       .subscribe({
-        next: (especialidade:Especialidade)=>{
+        next: (jsonEspecialidade:Especialidade)=>{
           this.exibirMensagemRedirecionar(`Especialidade ${this.Especialidade.Nome} alterada com sucesso.`);
         },
         error: (jsonErro: HttpErrorResponse) => {

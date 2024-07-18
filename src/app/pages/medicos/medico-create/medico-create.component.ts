@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertComponent } from '../../../shared/dialogs/alert/alert.component';
+import { Especialidade } from '../../../models/model.especialidade';
+import { EspecialidadesService } from '../../../services/especialidades/especialidades.service';
 
 @Component({
   selector: 'app-medico-create',
@@ -15,11 +17,41 @@ import { AlertComponent } from '../../../shared/dialogs/alert/alert.component';
 export class MedicoCreateComponent {
 
   Medico:Medico;
+  Especialidades: Especialidade[];
 
   constructor(private medicosService:MedicosService, 
               private router:Router, 
-              private dialog:MatDialog){
+              private dialog:MatDialog,
+              private especialidadesService: EspecialidadesService){    
     this.Medico = new Medico();
+    this.Especialidades = [];
+    this.getEspecialidades();
+  }
+  
+  getEspecialidades(): void{
+    this.especialidadesService.getAll()
+    .pipe(take(1))
+    .subscribe({
+      next: (jsonEspecialidades: Especialidade[]) => {
+        this.Especialidades = jsonEspecialidades;
+      },
+      error: () => {
+        this.exibirMensagemRedirecionar("Erro ao obter especialidades!\nEntre em contato com o suporte.");
+      }
+    })
+  }
+
+  onChangeEspecialidade(event:Event): void{    
+    const element: HTMLInputElement = <HTMLInputElement> event.target;    
+    if (element.checked){
+      let especialidade = new Especialidade();
+      especialidade.Id = Number(element.id);
+      especialidade.Nome = element.value;
+      this.Medico.Especialidades.push(especialidade);
+    }else{
+      this.Medico.Especialidades =  
+        this.Medico.Especialidades.filter(especialidade => especialidade.Id !== Number(element.id));
+    }
   }
 
   enviar(): void{
@@ -47,6 +79,9 @@ export class MedicoCreateComponent {
 
     if(!this.Medico.Nome)
       msg += 'Nome;\n';
+
+    if(!this.Medico.Especialidades.length)
+      msg += 'Especialidade(s);\n';
 
     if(msg){
       msg = 'Verifique os seguintes dados:\n'+msg;
@@ -82,5 +117,5 @@ export class MedicoCreateComponent {
 
   exibirMensagem(msg:string):void{
     this.dialog.open(AlertComponent, {data:{mensagem:msg}});
-  }  
+  }
 }

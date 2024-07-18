@@ -14,6 +14,17 @@
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" [(ngModel)]="this.Medico.Nome" class="pure-input-1-3" maxlength="100">
             </div>
+            <div class="pure-control-group">
+                <label>Especialidade(s):</label>            
+                <div *ngFor="let especialidade of this.Especialidades" style="display: inline-block;">
+                    <input type="checkbox" 
+                        [id]="especialidade.Id"
+                        [value]="especialidade.Nome"
+                        [checked]="especialidade.Checked"
+                        (change)="onChangeEspecialidade($event)">
+                    <label for="{{especialidade.Id}}" style="text-align: left; width: 6em; margin-left: 5px;">{{especialidade.Nome}}</label>
+                </div>
+            </div>
             <div class="pure-controls">
                 <button type="button" (click)="enviar()" class="pure-button pure-button-primary">Alterar</button>
                 <button type="button" (click)="desejaExcluir()" class="pure-button dinamico">Excluir</button>

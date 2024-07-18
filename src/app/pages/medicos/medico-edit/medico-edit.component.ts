@@ -7,34 +7,77 @@ import { take } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertComponent } from '../../../shared/dialogs/alert/alert.component';
 import { ConfirmComponent } from '../../../shared/dialogs/confirm/confirm.component';
+import { EspecialidadesService } from '../../../services/especialidades/especialidades.service';
+import { Especialidade } from '../../../models/model.especialidade';
 
 @Component({
   selector: 'app-medico-edit',
   templateUrl: './medico-edit.component.html',
   styleUrl: './medico-edit.component.css'
 })
+
 export class MedicoEditComponent {
 
   Medico:Medico;
+  Especialidades:any[]; //Id, Nome, Checked => por causa do Checked temos o tipo any[]. Essa propriedade não é do modelo de dados.
 
   constructor(private medicosService:MedicosService, 
               private activateRoute:ActivatedRoute, 
               private router:Router, 
-              private dialog:MatDialog
-  ){
-    this.Medico = new Medico();
-    
+              private dialog:MatDialog,
+              private especialidadesService: EspecialidadesService){
+
     const id = this.activateRoute.snapshot.paramMap.get('id');
-    this.medicosService.getById(Number(id))
+
+    this.Medico = new Medico();
+    this.Especialidades = [];
+
+    this.getDadosMedico(Number(id));
+  }
+
+  getDadosMedico(id: number): void{  
+    this.medicosService.getById(id)
     .pipe(take(1))
     .subscribe({
-      next: (medico:Medico)=>{
-        this.Medico = medico;
+      next: (jsonMedico:Medico)=>{
+        this.Medico = jsonMedico;
+        this.getEspecialidades();
       },
       error: (jsonErro: HttpErrorResponse) => {
         this.exibirMensagemErro(jsonErro);
-      }   
+      }
     })
+  }
+  
+  getEspecialidades(): void{
+    this.especialidadesService.getAll()
+    .pipe(take(1))
+    .subscribe({
+      next: (jsonEspecialidades: Especialidade[]) => {
+        this.Especialidades = jsonEspecialidades;
+        this.Especialidades.forEach((especialidade:any) => {
+          especialidade["Checked"] = this.Medico.Especialidades.some((medicoEspecialidade:Especialidade) => {
+            return medicoEspecialidade.Id === especialidade.Id;
+          });        
+        })        
+      },
+      error: () => {
+        this.exibirMensagemRedirecionar("Erro ao obter especialidades!\nEntre em contato com o suporte.");
+      }
+    })
+  }
+
+  onChangeEspecialidade(event:Event){ 
+    const element: HTMLInputElement = <HTMLInputElement> event.target;    
+    if (element.checked){
+      let especialidade = new Especialidade();
+      especialidade.Id = Number(element.id);
+      especialidade.Nome = element.value;
+      this.Medico.Especialidades.push(especialidade);
+    }else{
+      this.Medico.Especialidades =  
+        this.Medico.Especialidades.filter(especialidade => especialidade.Id !== Number(element.id));
+    }
   }
 
   enviar():void{
@@ -42,7 +85,7 @@ export class MedicoEditComponent {
       this.medicosService.put(this.Medico)
       .pipe(take(1))
       .subscribe({
-        next: (medico:Medico)=>{
+        next: (jsonMedico:Medico)=>{
           this.exibirMensagemRedirecionar(`Médico ${this.Medico.Nome} alterado com sucesso.`);
         },
         error: (jsonErro: HttpErrorResponse) => {
@@ -50,7 +93,6 @@ export class MedicoEditComponent {
         }   
       });
     }
-  
   }
 
   validarDadosExibirMensagem(): boolean{
@@ -61,6 +103,9 @@ export class MedicoEditComponent {
 
     if(!this.Medico.Nome)
       msg += 'Nome;\n';
+
+    if(!this.Medico.Especialidades.length)
+      msg += 'Especialidade(s);\n';
 
     if(msg){
       msg = 'Verifique os seguintes dados:\n'+msg;
