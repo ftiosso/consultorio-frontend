@@ -36,7 +36,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},   
 
   {
-    path:'', component:MasterDefaultComponent, canActivate:[usuarioAutenticadoGuard],
+    path:'', component:MasterDefaultComponent, canActivateChild:[usuarioAutenticadoGuard],
     children: [
       {path:'', redirectTo:'home', pathMatch:'full'},
       {path:'home', component:HomeComponent, },
